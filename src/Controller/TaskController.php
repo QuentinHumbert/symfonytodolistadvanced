@@ -11,8 +11,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use App\Entity\Task;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Task;
+use App\Entity\Categories;
 
 class TaskController extends AbstractController
 {
@@ -31,11 +32,19 @@ class TaskController extends AbstractController
         $task->setDescriptionTask('Decrire votre tâche');
         $task->setDueDateTask(new \DateTime('tomorrow'));
         $task->setPriorityTask('Choisir la priorité');
-        $task->setCategory();
+        // $task->setCategory();
 
         $form = $this->createFormBuilder($task)
-        ->add('nameTask', TextType::class)
-        ->add('descriptionTask', TextareaType::class)
+        ->add('nameTask', TextType::class, [
+            'attr' => [
+                'class'=>'form-control'
+                ]
+        ])
+        ->add('descriptionTask', TextareaType::class, [
+            'attr' => [
+                'class'=>'form-control'
+                ]
+        ])
         ->add('dueDateTask', DateType::class, [
             'widget'=>'single_text',
             'attr' => [
@@ -48,6 +57,9 @@ class TaskController extends AbstractController
                 'Normale' => 'Normale',
                 'Basse' => 'Basse',
             ],
+            'attr' => [
+                'class'=>'form-control'
+                ]
         ])
         ->add('category', EntityType::class, [
             'class' => Categories::class,
