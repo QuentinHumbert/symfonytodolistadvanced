@@ -1,0 +1,23 @@
+task:
+    list: Listing des tâches
+    add: Ajouter une tâche
+    update: Modifier une tâche 
+    name: Nom de la tâche
+    nameplaceholder: Ecrivez la tâche
+    desc: Description de la tâche
+    descplaceholder: Descrivez la tâche
+    duedate: Date effective
+    priority: Priorité de la tâche
+    category: Catégorie de la classe
+priority:
+        high: Haute
+        medium: Normale
+        low: Basse
+flash:
+    add: La tâche a était créée.
+    update: La tâche a était modifié.
+    delete: La tâche a était supprimé.
+button:
+    add:
+    update:
+    delete:

@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Entity\Task;
 use App\Entity\Categories;
 
@@ -26,7 +27,7 @@ class TaskController extends AbstractController
     }
 
     #[Route('/task/add', name: 'app_add_task')]
-    public function add(Request $request, ManagerRegistry $doctrine): Response
+    public function add(Request $request, ManagerRegistry $doctrine, TranslatorInterface $translator): Response
     {
         // Instance de l'entité Task
         $task = new Task();
@@ -53,6 +54,7 @@ class TaskController extends AbstractController
                 ]
             ])
             ->add('dueDateTask', DateType::class, [
+                'label' => $translator->trans('task.duedate'),
                 'widget' => 'single_text',
                 'attr' => [
                     'class' => 'form-control'
@@ -61,9 +63,9 @@ class TaskController extends AbstractController
             ->add('priorityTask', ChoiceType::class, [
                 'label' => 'Priorité de la tâche',
                 'choices' => [
-                    'Haute' => 'Haute',
-                    'Normale' => 'Normale',
-                    'Basse' => 'Basse',
+                    $translator->trans('priority.high') => $translator->trans('priority.high'),
+                    $translator->trans('priority.medium') => $translator->trans('priority.medium'),
+                    $translator->trans('priority.low') => $translator->trans('priority.low')
                 ],
                 'attr' => [
                     'class' => 'form-control'
@@ -131,6 +133,7 @@ class TaskController extends AbstractController
                 ]
             ])
             ->add('dueDateTask', DateType::class, [
+                'label' => 'Date effective',
                 'widget' => 'single_text',
                 'attr' => [
                     'class' => 'form-control'

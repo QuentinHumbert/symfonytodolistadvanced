@@ -1,0 +1,8 @@
+task:
+    list: 
+    add: Add a task
+    duedate: Due Date
+priority:
+        high: High
+        medium: Medium
+        low: Low
