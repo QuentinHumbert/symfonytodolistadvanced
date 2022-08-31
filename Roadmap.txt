@@ -1,0 +1,5 @@
+- Envoi d'email.
+- Affecter les tâches aux utilisateurs.
+- Ajouter dans la registration des nouveaux champs Prénom, Nom et Image de profil.
+- Dans la registration mettre en place ma comfirmation du mot de passe.
+- Une authentification et une registration via Google.

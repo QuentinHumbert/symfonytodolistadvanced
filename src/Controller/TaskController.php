@@ -29,14 +29,11 @@ class TaskController extends AbstractController
     #[Route('/task/add', name: 'app_add_task')]
     public function add(Request $request, ManagerRegistry $doctrine, TranslatorInterface $translator): Response
     {
-        // Instance de l'entité Task
         $task = new Task();
-        // Utilisation des Setters sur le nom, la description et la Date d'expiration
         $task->setNameTask('');
         $task->setDescriptionTask('');
         $task->setDueDateTask(new \DateTime('tomorrow'));
 
-        // Création du formulaire
         $form = $this->createFormBuilder($task)
             ->add('nameTask', TextType::class, [
                 'label' => 'Nom de la tâche',
@@ -159,7 +156,7 @@ class TaskController extends AbstractController
                 ]
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'Créer tâche',
+                'label' => 'Modifier tâche',
                 'attr' => [
                     'class' => 'form-control'
                 ]
@@ -168,12 +165,9 @@ class TaskController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            // Réccupére toutes les données du formalaire
             $task = $form->getData();
             $entityManager = $doctrine->getManager();
-            // Indique à la doctrine la sauvegarde (Pas de requête)
             $entityManager->persist($task);
-            // Execute la requête 
             $entityManager->flush();
 
             $this->addFlash(
@@ -194,9 +188,7 @@ class TaskController extends AbstractController
     {
         $task = $doctrine->getRepository(Task::class)->find($id);
         $entityManager = $doctrine->getManager();
-        // Indique la requête de suppression à la doctrine
         $entityManager->remove($task);
-        // Execute la requête 
         $entityManager->flush();
 
         $this->addFlash(

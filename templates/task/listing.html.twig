@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Listing des tâches{% endblock %}
+{% block title %}{{ 'task.tasktittle'|trans }}{% endblock %}
 
 {% block body %}
 
@@ -9,17 +9,21 @@
         {{ message }}
     </div>
 {% endfor %}
+{% if is_granted('ROLE_USER') %}
+<h2>{{ 'task.greeting'|trans }} {{ app.user.email }}</h2>
+<button type="button" class="btn btn-danger" onclick="window.location.href='{{ path('app_logout') }}'">{{ 'button.disconnect'|trans }}</button><br>
+{% endif %}
 
-<h1>Listing des tâches</h1>
-<button type="button" class="btn btn-primary" onclick="window.location.href='{{ path('app_add_task') }}'">Ajouter</button>
+<h1>{{ 'task.tasktittle'|trans }}</h1>
+<button type="button" class="btn btn-primary" onclick="window.location.href='{{ path('app_add_task') }}'">{{ 'button.add'|trans }}</button>
 <table class="table table-dark table-hover mr-5">
     <thead>
         <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Date d'expiration</th>
-            <th scope="col">Priorité</th>
-            <th scope="col">Catégorie</th>
+            <th scope="col">{{ 'task.tasktid'|trans }}</th>
+            <th scope="col">{{ 'task.taskname'|trans }}</th>
+            <th scope="col">{{ 'task.taskduedate'|trans }}</th>
+            <th scope="col">{{ 'task.taskpriority'|trans }}</th>
+            <th scope="col">{{ 'task.taskcategory'|trans }}</th>
         </tr>
     </thead>
     <tbody>
@@ -30,8 +34,8 @@
             <td>{{ task.dueDateTask|date("d/m/Y H:i:s")}}</td>
             <td>{{ task.priorityTask }}</td>
             <td>{{ task.category.getLibelleCategory()}}</td>
-            <td><button type="button" class="btn btn-success" onclick="window.location.href='{{ path('app_update_task', {id:task.idTask}) }}'">Modifier</button></td>
-            <td><button type="button" class="btn btn-danger" onclick="window.location.href='{{ path('app_delete_task', {id:task.idTask}) }}'">Supprimer</button></td>
+            <td><button type="button" class="btn btn-success" onclick="window.location.href='{{ path('app_update_task', {id:task.idTask}) }}'">{{ 'button.update'|trans }}</button></td>
+            <td><button type="button" class="btn btn-danger" onclick="window.location.href='{{ path('app_delete_task', {id:task.idTask}) }}'">{{ 'button.delete'|trans }}</button></td>
         </tr>
     {% endfor %}
 </table>

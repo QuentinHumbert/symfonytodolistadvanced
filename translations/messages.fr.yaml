@@ -1,4 +1,11 @@
 task:
+    greeting: Bonjour
+    tasktittle: Listing des tâches
+    taskid: ID
+    taskname: Nom
+    taskduedate: Date d'expiration
+    taskpriority: Priorité
+    taskcategory: Catégorie
     list: Listing des tâches
     add: Ajouter une tâche
     update: Modifier une tâche 
@@ -18,6 +25,16 @@ flash:
     update: La tâche a était modifié.
     delete: La tâche a était supprimé.
 button:
-    add:
-    update:
-    delete:
+    add: Ajouter
+    update: Modifier
+    delete: Supprimer
+    connect: Connexion
+    disconnect: Déconnexion
+    register: Enregistrer
+login:
+    alreadylog: Vous étes inscrit en tant que
+user:
+    loginentry: Veuillez vous connecter avant de continuer
+    registerentry: Veuillez vous enregistrer pour continuer
+    email: E-Mail
+    password: Mot de Passe
