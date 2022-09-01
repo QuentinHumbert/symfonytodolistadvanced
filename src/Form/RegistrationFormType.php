@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -40,7 +41,21 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('avatar', FileType::class, [
-                'label' => 'Avatar'
+                'label' => 'Avatar',
+                'required' => 'false',
+                'attr' => [
+                    'class' => 'form-control'
+                ],
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'application/png',
+                            'application/jpeg'
+                        ],
+                        'mimeTypesMessage' => 'Indiquer un fichier image valide.',
+                    ])
+                ]
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'label' => 'Accepter les termes',
@@ -85,8 +100,7 @@ class RegistrationFormType extends AbstractType
                         'class' => 'form-control'
                     ],
                 ],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
